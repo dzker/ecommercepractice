@@ -26,29 +26,29 @@ class _CartListWidgetState extends State<CartListWidget> {
       items.add(_CartListItemWidget(
         item: c,
       ));
-      items.add(Padding(
+      items.add(const Padding(
         padding: EdgeInsets.only(top: 8.0),
       ));
     });
     return Scaffold(
         appBar: AppBar(
-          title: Text('My Cart'),
+          title: const Text('My Cart'),
           actions: <Widget>[
             TextButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.white),
               ),
               onPressed: () => this._checkout(),
-              child: Text("Checkout"),
+              child: const Text("Checkout"),
             ),
           ],
         ),
         body: Container(
-            decoration: BoxDecoration(color: Color(0xfff0eff4)),
+            decoration: const BoxDecoration(color: Color(0xfff0eff4)),
             child: Stack(
               children: <Widget>[
                 ListView(
-                  padding: EdgeInsets.only(bottom: 64),
+                  padding: const EdgeInsets.only(bottom: 64),
                   children: items,
                 ),
                 Positioned(
@@ -68,7 +68,7 @@ class _CartListWidgetState extends State<CartListWidget> {
 class _CartListSummaryFooterWidget extends StatelessWidget {
   final String totalPrice;
 
-  _CartListSummaryFooterWidget({required this.totalPrice});
+  const _CartListSummaryFooterWidget({required this.totalPrice});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,21 +76,23 @@ class _CartListSummaryFooterWidget extends StatelessWidget {
             color: Color(0XFFF4F4F4),
             border: Border(top: BorderSide(color: Colors.grey, width: 0.5))),
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Center(
               child: Row(
             children: <Widget>[
               Text(
                 'Total',
                 textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge!
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
               Expanded(
-                  child: Text(
-                this.totalPrice,
-                textAlign: TextAlign.right,
-                style: Theme.of(context).textTheme.displayMedium, //subhead
-              ))
+                  child: Text(totalPrice,
+                      textAlign: TextAlign.right,
+                      style: Theme.of(context).textTheme.labelLarge //subhead
+                      ))
             ],
           )),
         ));
@@ -108,7 +110,7 @@ class _CartListItemWidget extends StatelessWidget {
           border: Border(
               top: BorderSide(color: Colors.grey, width: 0.5),
               bottom: BorderSide(color: Colors.grey, width: 0.5))),
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Row(
         children: <Widget>[
           Container(
@@ -124,7 +126,9 @@ class _CartListItemWidget extends StatelessWidget {
           Expanded(
               child: Text(
             item.name,
-            style: const TextStyle(fontSize: 75, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 15,
+            ),
             // Theme.of(context).textTheme.titleLarge.apply(fontSizeFactor: 0.75),
           )),
           const Padding(
@@ -133,7 +137,7 @@ class _CartListItemWidget extends StatelessWidget {
           Text(
             item.formattedPrice,
             textAlign: TextAlign.right,
-            style: Theme.of(context).textTheme.displayMedium, //.subhead
+            style: Theme.of(context).textTheme.labelLarge, //.subhead
           )
         ],
       ),

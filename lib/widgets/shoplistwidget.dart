@@ -4,6 +4,8 @@ import 'package:ecommerce/models/shopping_cart.dart';
 import 'package:ecommerce/models/item.dart';
 
 class ShopListWidget extends StatefulWidget {
+  const ShopListWidget({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _ShopListState();
@@ -37,16 +39,16 @@ class _ShopListState extends State<ShopListWidget> {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           if (cart.isExists(item)) {
             cart.remove(item);
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('Item is removed from cart!'),
             ));
           } else if (item.inStock) {
             cart.add(item);
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('Item is added to cart!'),
             ));
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('Item is out of!'),
             ));
           }
@@ -57,7 +59,7 @@ class _ShopListState extends State<ShopListWidget> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text("Apple Store"),
+          title: const Text("Apple Store"),
         ),
         body: GridView.count(
           childAspectRatio: width / height,
@@ -74,7 +76,7 @@ class _ShopListState extends State<ShopListWidget> {
                             cart: this.cart,
                           )));
                 },
-                icon: Icon(Icons.shopping_cart),
+                icon: const Icon(Icons.shopping_cart),
                 label: Text("${cart.numOfItems}"),
               ));
   }
@@ -94,20 +96,20 @@ class _ShopListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     Border border;
     if (isSideLine) {
-      border = Border(
+      border = const Border(
           bottom: BorderSide(color: Colors.grey, width: 0.5),
           right: BorderSide(color: Colors.grey, width: 0.5));
     } else {
-      border = Border(bottom: BorderSide(color: Colors.grey, width: 0.5));
+      border = const Border(bottom: BorderSide(color: Colors.grey, width: 0.5));
     }
     return InkWell(
-        onTap: () => this.onTap(item),
+        onTap: () => onTap(item),
         child: Container(
             decoration: BoxDecoration(border: border),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                 ),
                 Container(
@@ -117,18 +119,14 @@ class _ShopListItem extends StatelessWidget {
                   ),
                   height: 250,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                 ),
                 Text(item.name,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold) // change using text style
-                    // style: Theme.of(context)
-                    //     .textTheme
-                    //     .title
-                    //     .apply(fontSizeFactor: 0.8)
                     ),
                 const Padding(
                   padding: EdgeInsets.only(top: 16),
@@ -140,21 +138,18 @@ class _ShopListItem extends StatelessWidget {
                                 .textTheme
                                 .headlineMedium!
                                 .fontSize! *
-                            0.8)), //change
-                Padding(
+                            0.7)), //change
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                 ),
                 Text(
-                  this.isInCart ? "In Cart" : item.formattedAvailability,
+                  isInCart ? "In Cart" : item.formattedAvailability,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                       color: isInCart ? Colors.blue : item.availabilityColor),
                 )
-                // style: Theme.of(context).textTheme.headlineLarge.fontSize! * 0.8,
-                //     color:
-                //         isInCart ? Colors.blue : item.availabilityColor),
               ],
             )));
   }

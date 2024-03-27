@@ -34,7 +34,7 @@ class ShoppingCart {
       items.add(item);
       return;
     }
-    if (!this.isExists(item)) {
+    if (!isExists(item)) {
       items.add(item);
     }
   }
@@ -59,6 +59,6 @@ class ShoppingCart {
               'imagepath': i.imagepath
             })
         .toList();
-    return {"orderId": this.orderId, "items": items, "total": this.totalPrice};
+    return {"orderId": orderId, "items": items, "total": totalPrice};
   }
 }
