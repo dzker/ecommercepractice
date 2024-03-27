@@ -115,7 +115,7 @@ class _CartListItemWidget extends StatelessWidget {
             height: 64,
             child: AspectRatio(
               aspectRatio: 1,
-              child: Image.network(item.imageUrl),
+              child: Image.asset(item.imagepath),
             ),
           ),
           const Padding(
