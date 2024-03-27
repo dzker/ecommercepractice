@@ -1,5 +1,6 @@
 import 'item.dart';
 import 'package:uuid/uuid.dart';
+
 class ShoppingCart {
   final orderId = Uuid().v4();
   List<Item> items = [];
@@ -12,12 +13,14 @@ class ShoppingCart {
     });
     return totalPrice;
   }
+
   String get formattedTotalPrice {
     if (isEmpty) {
       return Item.formatter.format(0);
     }
     return Item.formatter.format(this.totalPrice);
   }
+
   bool isExists(item) {
     if (items.isEmpty) {
       return false;
@@ -25,6 +28,7 @@ class ShoppingCart {
     final indexOfItem = items.indexWhere((i) => item.id == i.id);
     return indexOfItem >= 0;
   }
+
   void add(Item item) {
     if (items.isEmpty) {
       items.add(item);
@@ -34,6 +38,7 @@ class ShoppingCart {
       items.add(item);
     }
   }
+
   void remove(Item item) {
     if (items.isEmpty) return;
     final indexOfItem = items.indexWhere((i) => item.id == i.id);
@@ -41,6 +46,7 @@ class ShoppingCart {
       items.removeAt(indexOfItem);
     }
   }
+
   Map<String, dynamic> get toMap {
     final List<Map<String, dynamic>> items = this
         .items
@@ -50,7 +56,7 @@ class ShoppingCart {
               'description': i.description,
               'price': i.price,
               'inStock': i.inStock,
-              'imageUrl': i.imageUrl
+              'imagepath': i.imagepath
             })
         .toList();
     return {"orderId": this.orderId, "items": items, "total": this.totalPrice};

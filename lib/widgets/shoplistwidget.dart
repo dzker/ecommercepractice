@@ -113,7 +113,7 @@ class _ShopListItem extends StatelessWidget {
                 Container(
                   child: AspectRatio(
                     aspectRatio: 1,
-                    child: Image.network(item.imageUrl),
+                    child: Image.asset(item.imagepath),
                   ),
                   height: 250,
                 ),
